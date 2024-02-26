@@ -1,0 +1,344 @@
+Regular Expression
+==================
+	An object which describes a sequence of characters that specify a pattern.
+	This pattern matches against a string of text when performing search or replace.
+	To create a regular expression,the user can either go for
+		-Using Literals
+		-Using RegExp() Constructor
+
+Using Literals
+==============
+	To create a regular expression using literal,the user has to assign the regular expression to a variable.
+	Used to execute at compile time.
+	Syntax:
+		var variablename=/pattern/options;
+	where,
+	pattern:providing the text to be used in the search.
+	options:providing options for modifying search patterns.
+Options:
+	-i = Used to ignore case
+	-g = Used to match for all occurences of the pattern in the string.
+	-m = Used to match over multiple lines.
+
+Using RegExp() Constructor
+	* Creates a regular expression object.
+	* It is used to execute at runtime.
+	* Takes two arguments
+		-String
+		-Flag(optional such as i,g,m etc)
+	* Syntax:
+		var varname=new RegExp("string","options");
+
+Testing Regular Expression
+==========================
+* RegExp() object has two methods to test a match for a string.
+	-test():Tests for a match in the given string and return either true or false.
+	Syntax : regvarname.test(string);
+	-exec():executes a search to find a match for a specified pattern in a string.If found returns the string,otherwise returns null.
+	Syntax : regvarname.exec(string);
+
+Example 1
+=========
+<script>
+        var ip="IFC Infotech";
+        var r=/tech/;
+        var op=r.exec(ip);
+        alert(op);
+        var r1=/tech/i;
+        var op1=r1.test(ip);
+        alert(op1);
+        
+    </script>
+
+Example 2
+=========
+ <script>
+        var ip="IFC InfoTech";
+        var r=/tech/;
+        var op=r.exec(ip);
+        alert(op);
+        var r1=/tech/;
+        var op1=r1.test(ip);
+        alert(op1);
+        
+    </script>
+
+String Method
+==============
+match()
+-------
+	* match()-Same as exec() used to search for a pattern in a string and returns an array of patterns that was matched.
+	* If no match is found return null.
+Syntax
+------
+	var varname=String.match(reg);
+
+search()
+--------
+	Used to search and return the position of the given pattern in the string.
+	Indexing starts at 0 and if pattern is not found returns -1.
+Syntax
+------
+	var varname=String.search(reg);
+
+replace()
+---------
+	Used to search for a string and replace the string with another string.
+	If no match found return null.
+Syntax
+------
+	var varname=String,replace(reg,"replacestring");
+
+
+Example 1
+---------
+<script>
+        var ip="IFC\n tech Info\n tech";
+        var r=/tech/m;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip1="IFC Tech Infotech";
+        var r1=RegExp("tech","g");
+        var op1=ip1.search(r1);
+        alert(op1);
+
+        var ip2="IFC InfoTech Programming Language";
+        var r2=/Language/i;
+        var op2=ip2.replace(r2,"World")
+        alert(op2);
+        
+    </script>
+
+Example 2
+---------
+<script>
+        var ip="IFC\n tech Info\n tech";
+        var r=/tech/gm;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip1="IFC Tech Infotech";
+        var r1=RegExp("tech","gi");
+        var op1=ip1.search(r1);
+        alert(op1);
+
+        var ip2="IFC InfoTech Programming Language";
+        var r2=/language/i;
+        var op2=ip2.replace(r2,"World")
+        alert(op2);
+        
+    </script>
+
+Metacharacters
+==============
+	* These characters have a special meaning proceeded by a backslash.
+	* It is used to allow the user to control the search pattern in same way.
+	* .(dot) : Used to find a single character.
+	* \w : Used to find a word character from a-z,0-9,and underscore.
+	* \W : Used to find a non-word character.
+	* \d : Used to find a digit from 0-9.
+	* \D : Used to find a non-digit character.
+	* \s : Used to find a white space character.
+	* \S : Used to find a non white space character.
+	* \b : Used to find a match at the beginning or end of a word.
+	* \B : Used to find a match not at the beginning or end of a word.
+
+Example 1:
+=========
+<script>
+        var ip="Welcome To Javascript Regular Expression";
+        var r=/c..e/g;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip="Welcome To Javascript Regular Expression_100%";
+        var r=/\w+/g;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip="Welcome To Javascript Regular Expression_100%";
+        var r=/\W/g;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip="Welcome To Javascript Regular Expression_100%";
+        var r=/\d/g;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip="Welcome To Javascript Regular Expression_100%";
+        var r=/\D/g;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip="Welcome To Javascript Regular Expression_100%";
+        var r=/\s/g;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip="Welcome To Javascript Regular Expression_100%";
+        var r=/\S/g;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip="Welcome To Javascript Regular Expression_100%";
+        var r=/\bWelcome/g;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip="Welcome To Javascript Regular Expression_100%";
+        var r=/\BWelcome/g;
+        var op=ip.match(r);
+        alert(op);
+    </script>
+
+Brackets
+========
+	* Used to specify the range of the characters such as alphabets,digits etc.
+	* [a-z] : Used to match any no.of.alphabets specified between a to z.
+	* [0-9] : Used to match any no.of digits specified between 0 to 9.
+	* [^a-z]: Used to match any no.of alphabets not specified between a to z.
+	* [^0-9]: Used to match any no.of digits not specified between 0 to 9.
+	* [a|b] : Used to find any alternative from the specified ones.Any type of alternative can be specified.
+ 
+Example 1
+=========
+<script>
+        var ip="IFC Infotech 01-01-01";
+        var r=/[a-e]+/g;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip="IFC Infotech 01-02-03";
+        var r=/[0-2]/g;
+        var op=ip.match(r);
+        alert(op);
+       
+        var ip="IFC Infotech 01-02-03";
+        var r=/[^a-e]/g;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip="IFC Infotech 01-02-03";
+        var r=/[^0-2]/g;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip="IFC Infotech 01-01-01";
+        var r=/[C|X]/g;
+        var op=ip.match(r);
+        alert(op);
+    </script>
+
+Quantifiers
+============
+	* c+ : Used to match string containing one or more occurence of c.
+	* c* : Used to match string containing zero or more occurence of c.
+	* c? : Used to match string containing zero or one occurence of c.
+	* c{x} : Used to match any string containing x characters.
+	* c{x,y}: Used to match any string containing x to y characters.
+	* c{x,} : Used to match any string containing atleast x characters.
+	* c$ : Used to match any string with the given pattern at the end of the string.
+	* ^c : Used to match any string with the given pattern at the beginning of the string.
+
+Example 1:
+==========
+<script>
+        var ip="IFC Infotech";
+        var r=/[x-z]+/g;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip="IFC Infotech";
+        var r=/[a-c]*/g;
+        var op=ip.match(r);
+        alert(op);
+       
+        var ip="IFC Infotech";
+        var r=/fe?/g;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip="IFC Infotech";
+        var r=/\w{3}/g;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip="1,200,3200,54";
+        var r=/\d{3,4}/g;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip="1,200,3200,54";
+        var r=/\d{2,}/g;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip="Javascript is also called as ECMAscript";
+        var r=/script$/ig;
+        var op=ip.match(r);
+        alert(op);
+
+        var ip="Javascript is also called as ECMAscript";
+        var r=/^script/g;
+        var op=ip.match(r);
+        alert(op);
+    </script>
+
+Form Validation
+===============
+	The mechanism used to validate the form on the client side itself without disturbing the server.
+	Validation can be done using regular expression as well as normal Javascript.
+	Form validation can be done
+		-Checking for empty fields
+		-Checking for alphabetic data
+		-Checking for numeric data
+		-Checking for length restriction
+
+Example 1
+=========
+<body>
+    <form action="#">
+        Enter the name: <input type="text" id="fname" size=20 onkeyup="callname()"><label id="L1"></label>
+        Enter the age : <input type="text" id="age" size=4 onkeyup="callage()"><label id="L2"></label>
+    </form>
+    <script>
+      function callname(){
+        var name=document.getElementById("fname");
+        var r1=/^[a-zA-Z]+$/;
+       // var r1=/^[a-zA-Z]*\s{1}[a-zA-Z]*$/;
+       if(r1.test(name.value)==false)
+       {
+        document.getElementById("L1").style.color="red";
+        document.getElementById("L1").style.fontSize=20;
+        document.getElementById("L1").innerHTML="Invalid Name";
+        return false;
+       }
+       else{
+        document.getElementById("L1").style.color="green";
+        document.getElementById("L1").style.fontSize=20;
+        document.getElementById("L1").innerHTML="Valid Name";
+        return true;
+       }
+      } 
+      function callage()
+      {
+        var name=document.getElementById("age");
+        var r1=/^[0-9]{1,2}$/;
+        if(r1.test(name.value)==false)
+       {
+        document.getElementById("L2").style.color="red";
+        document.getElementById("L2").style.fontSize=20;
+        document.getElementById("L2").innerHTML="Invalid Age";
+        return false;
+       }
+       else{
+        document.getElementById("L2").style.color="green";
+        document.getElementById("L2").style.fontSize=20;
+        document.getElementById("L2").innerHTML="Valid Age";
+        return true;
+       }
+      }
+    </script>
+</body> 
